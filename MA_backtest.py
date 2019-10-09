@@ -5,4 +5,4 @@ from event import SignalEvent, EventType
 from strategy import AbstractStrategy
 
 
-test = 'lalala'
+test = 'lalalala'
