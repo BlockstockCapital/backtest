@@ -6,3 +6,4 @@ from strategy import AbstractStrategy
 
 
 test = 'lalalala'
+test2 = 'lalala'
