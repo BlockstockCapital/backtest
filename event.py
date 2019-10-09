@@ -3,6 +3,7 @@ from enum import Enum
 EventType = Enum("EventType", "TICK BAR SIGNAL ORDER FILL SENTIMENT")
 
 class Event(object):
+
     pass
 
 
