@@ -7,3 +7,4 @@ from strategy import AbstractStrategy
 
 test = 'lalalala'
 test2 = 'lalalal'
+test3 = 'unresolved issue'
