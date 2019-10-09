@@ -5,5 +5,5 @@ from event import SignalEvent, EventType
 from strategy import AbstractStrategy
 
 
-
-motto = "Let's earn money dude!!!"
+test = 'lalalala'
+test2 = 'lalalal'
