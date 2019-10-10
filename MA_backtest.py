@@ -6,4 +6,3 @@ from strategy import AbstractStrategy
 
 
 motto = "Let's earn money dude!!!"
-print(motto)
