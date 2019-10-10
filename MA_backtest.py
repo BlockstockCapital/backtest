@@ -3,6 +3,5 @@ import numpy as np
 
 from event import SignalEvent, EventType
 from strategy import AbstractStrategy
-
-
-motto = "Let's earn money dude!!!"
+import queue
+from trading_session import TradingSession
