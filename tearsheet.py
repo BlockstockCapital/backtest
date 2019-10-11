@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from abc import ABCMeta, abstractmethod
+import seaborn as sns
+import pandas as pd
+import performance as perf
+import matplotlib.gridspec as gridspec
 
 
 class AbstractStatistics(object):
