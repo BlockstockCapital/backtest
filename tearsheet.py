@@ -5,6 +5,7 @@ import seaborn as sns
 import pandas as pd
 import performance as perf
 import matplotlib.gridspec as gridspec
+from price_parser import PriceParser
 
 
 class AbstractStatistics(object):
