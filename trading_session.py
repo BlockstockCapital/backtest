@@ -1,8 +1,13 @@
 from price_parser import PriceParser
-from .event import EventType
+from event import EventType
 import tearsheet as statistics
 import queue
-
+from yahoo_daily_csv_bar import YahooDailyCsvBarPriceHandler
+from fixed import FixedPositionSizer
+from risk_manager_example import ExampleRiskManager
+from portfolio_handler import PortfolioHandler
+from ib_simulated import IBSimulatedExecutionHandler
+from tearsheet import TearsheetStatistics
 
 class TradingSession(object):
     """
@@ -47,6 +52,50 @@ class TradingSession(object):
         if self.session_type == "live":
             if self.end_session_time is None:
                 raise Exception("Must specify an end_session_time when live trading")
+
+    def _config_session(self):
+        """
+        Initialises the necessary classes used
+        within the session.
+        """
+        if self.price_handler is None and self.session_type == "backtest":
+            self.price_handler = YahooDailyCsvBarPriceHandler(
+                self.config.CSV_DATA_DIR, self.events_queue,
+                self.tickers, start_date=self.start_date,
+                end_date=self.end_date
+            )
+
+        if self.position_sizer is None:
+            self.position_sizer = FixedPositionSizer()
+
+        if self.risk_manager is None:
+            self.risk_manager = ExampleRiskManager()
+
+        if self.portfolio_handler is None:
+            self.portfolio_handler = PortfolioHandler(
+                self.equity,
+                self.events_queue,
+                self.price_handler,
+                self.position_sizer,
+                self.risk_manager
+            )
+
+        # if self.compliance is None:
+        #     self.compliance = ExampleCompliance(self.config)
+
+        if self.execution_handler is None:
+            self.execution_handler = IBSimulatedExecutionHandler(
+                self.events_queue,
+                self.price_handler,
+                self.compliance
+            )
+
+        if self.statistics is None:
+            self.statistics = TearsheetStatistics(
+                self.config, self.portfolio_handler,
+                self.title, self.benchmark
+            )
+
 
     def _run_session(self):
         """
